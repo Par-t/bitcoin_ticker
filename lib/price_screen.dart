@@ -26,16 +26,20 @@ class _PriceScreenState extends State<PriceScreen> {
   }
 
   void exchangeRate(String currency) async {
+    List<int> rateInt = [];
     var currencyData;
     for (String crypto in cryptoList) {
       cryptoName = crypto;
       currencyData = await currencyRate.getExchangeRate(currency, cryptoName);
-      setState(() {
-        rate = currencyData['rate'];
-        int rateInt = rate.toInt();
-        conversion[cryptoName] = rateInt;
-      });
+      rate = currencyData['rate'];
+      rateInt.add(rate.toInt());
     }
+    int i = 0;
+    setState(() {
+      for (String crypto in cryptoList) {
+        conversion[crypto] = rateInt[i++];
+      }
+    });
   }
 
   DropdownButton getAndroidCurrency() {

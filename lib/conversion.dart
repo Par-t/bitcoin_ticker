@@ -1,6 +1,6 @@
 import 'networking.dart';
 
-const apiKey = "<YOUR_API_KEY>";
+const apiKey = "902BF62D-D828-4F23-88F5-8006FEF30B1B";
 
 class CurrencyRate {
   Future<dynamic> getExchangeRate(
