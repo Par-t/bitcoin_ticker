@@ -4,6 +4,7 @@ import 'package:bitcoin_ticker_app/conversion.dart';
 import 'coin_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:bitcoin_ticker_app/reusable.dart';
 import 'dart:io' show Platform;
 
 CurrencyRate currencyRate = CurrencyRate();
@@ -70,7 +71,7 @@ class _PriceScreenState extends State<PriceScreen> {
     for (String currency in currenciesList) {
       pickerItems.add(Text(
         currency,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ));
     }
     return CupertinoPicker(
@@ -93,69 +94,18 @@ class _PriceScreenState extends State<PriceScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
-            child: Card(
-              color: Colors.indigoAccent,
-              elevation: 5.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
-                child: Text(
-                  "1 BTC =  ${conversion['BTC']} $selectedCurrency",
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
-            child: Card(
-              color: Colors.indigoAccent,
-              elevation: 5.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
-                child: Text(
-                  "1 ETH =  ${conversion['ETH']} $selectedCurrency",
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
-            child: Card(
-              color: Colors.indigoAccent,
-              elevation: 5.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
-                child: Text(
-                  "1 LTC =  ${conversion['LTC']} $selectedCurrency",
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          ),
+          ReusableBox(
+              conversion: conversion,
+              selectedCardCurrency: selectedCurrency,
+              cryptoName: cryptoList[0]),
+          ReusableBox(
+              conversion: conversion,
+              selectedCardCurrency: selectedCurrency,
+              cryptoName: cryptoList[1]),
+          ReusableBox(
+              conversion: conversion,
+              selectedCardCurrency: selectedCurrency,
+              cryptoName: cryptoList[2]),
           Container(
             height: 150.0,
             alignment: Alignment.center,
